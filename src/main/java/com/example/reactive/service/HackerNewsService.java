@@ -38,7 +38,7 @@ public class HackerNewsService {
      */
     public Flux<Integer> getNewsIdentifiers(@NonNull final NewsType newsType,
                                             @Min(1) @Max(1024) final Integer numberOfItems) {
-        log.debug("Fetching {} news stories of type {} from the web ...", numberOfItems, newsType);
+        log.debug("Fetching {} news stories identifiers of type {} from the web ...", numberOfItems, newsType);
         return webClient.get()
                 .uri(newsType.getIdentifiersPath())
                 .accept(MediaType.APPLICATION_JSON)
