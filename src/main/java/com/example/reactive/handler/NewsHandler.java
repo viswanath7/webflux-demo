@@ -32,6 +32,15 @@ public class NewsHandler {
         log.debug("Handling request: {}", serverRequest);
         final var newsType = NewsType.valueOf(Optional.of(serverRequest.pathVariable("newsType")).orElse("top").trim().toUpperCase());
         final var numberOfItems = Integer.parseInt(serverRequest.queryParam("numberOfItems").orElse("10"));
+        return fetchNews(newsType, numberOfItems);
+    }
+
+    public Mono<ServerResponse> listTopNews(final ServerRequest serverRequest) {
+        log.debug("Handling request: {}", serverRequest);
+        return fetchNews(NewsType.TOP, 3);
+    }
+
+    private Mono<ServerResponse> fetchNews(NewsType newsType, int numberOfItems) {
         final var newsFlux = newsService.getNews(newsType, numberOfItems)
                 .cache(Duration.ofMinutes(5))
                 .retryWhen(Retry.backoff(3, Duration.ofSeconds(2)));

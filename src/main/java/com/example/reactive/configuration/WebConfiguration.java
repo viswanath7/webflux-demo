@@ -31,6 +31,7 @@ public class WebConfiguration implements WebFluxConfigurer {
     public RouterFunction<ServerResponse> newsRoute(final NewsHandler newsHandler) {
         return RouterFunctions.route()
                 .GET("/news/{newsType}", accept(APPLICATION_JSON), newsHandler::listNews)
+                .GET("/news", accept(APPLICATION_JSON), newsHandler::listTopNews)
                 .after((request, response) -> {
                     log.debug("HTTP response: {}", response);
                     return response;

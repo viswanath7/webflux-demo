@@ -1,5 +1,8 @@
 package com.example.reactive.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum NewsType {
     TOP("/topstories.json?print=pretty"),
     BEST("/beststories.json?print=pretty"),
