@@ -33,7 +33,7 @@ public class WebConfiguration implements WebFluxConfigurer {
                 .GET("/news/{newsType}", accept(APPLICATION_JSON), newsHandler::listNews)
                 .GET("/news", accept(APPLICATION_JSON), newsHandler::listTopNews)
                 .after((request, response) -> {
-                    log.debug("HTTP response: {}", response);
+                    log.debug("HTTP response status code: {}", response.statusCode());
                     return response;
                 })
                 .build();
@@ -44,7 +44,7 @@ public class WebConfiguration implements WebFluxConfigurer {
         return RouterFunctions.route()
                 .GET("/health-check", accept(TEXT_PLAIN), healthHandler::healthCheck)
                 .after((request, response) -> {
-                    log.debug("HTTP response: {}", response);
+                    log.debug("HTTP response status code: {}", response.statusCode());
                     return response;
                 })
                 .build();

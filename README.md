@@ -11,6 +11,7 @@ Supported values for optional **newsType** path parameter are
  * latest
 The default value of **newsType** path parameter is **top**
 
+
 The default value of optional query parameter **numberOfItems** is 3. Supplied value must be in the range 1 to 1024. 
 
 
